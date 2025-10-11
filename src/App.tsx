@@ -1,9 +1,9 @@
-import { Button } from "./components/ui/button";
+import Hero from "./sections/Hero";
 
 function App() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
+    <div className="flex min-h-svh flex-col items-center gap-4">
+      <Hero />
     </div>
   );
 }
