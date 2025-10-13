@@ -2,6 +2,7 @@ import Hero from "./sections/Hero/Hero";
 import About from "./sections/About/About";
 import Team from "./sections/Team/Team";
 import Header from "./sections/Header/header";
+import Footer from "./sections/Footer/footer";
 import { Button } from "./components/ui/button";
 import { ArrowUp } from "lucide-react";
 
@@ -19,6 +20,7 @@ function App() {
       >
         <ArrowUp />
       </Button>
+      <Footer/>
     </div>
   );
 }
