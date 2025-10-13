@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Section = styled.section`
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 1rem 2rem;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -14,11 +14,9 @@ export const SectionHeader = styled.div`
 `;
 
 export const Title = styled.h2`
-    color: #1e1e2f;
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 1rem;
+  color: #00000;
+  font-size: 2.5rem;
+  font-weight: 700;
 `;
 
 export const Description = styled.p`
@@ -30,24 +28,25 @@ export const Description = styled.p`
 export const SectionContent = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2rem;
-  max-width: 1100px;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem; // Aumentar o gap para dar mais espaço entre as colunas
+  max-width: 1200px; // Adicionar largura máxima
 `;
 
 export const SectionLeft = styled.div`
-  flex: 1 1 45%;
-  min-width: 300px;
+  flex: 1 1 400px; // Base maior e mais específica
+  max-width: 500px; // Limitar largura máxima
 
   h2 {
     font-size: 2.5rem;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.2;
     margin-bottom: 1rem;
   }
 
   p {
-    color: #444;
+    color: #6b6b8c;
     margin-bottom: 1.5rem;
     line-height: 1.6;
   }
@@ -59,9 +58,9 @@ export const SectionLeft = styled.div`
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 0.5rem;
-      color: #333;
-      font-weight: 500;
+      margin-bottom: 0.25rem;
+      color: #6b6b8c;
+      font-weight: 400;
 
       svg {
         color: #4f46e5;
@@ -72,16 +71,18 @@ export const SectionLeft = styled.div`
 `;
 
 export const SectionRight = styled.div`
-  flex: 1 1 45%;
-  min-width: 300px;
+  flex: 1 1 400px; // Base maior e mais específica
+  max-width: 600px; // Limitar largura máxima
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const StatGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  justify-items: center;
-  max-width: 600px;
+  gap: 1rem;
+  width: 30vw;
   margin: 0 auto;
 
   @media (max-width: 400px) {
@@ -90,11 +91,11 @@ export const StatGrid = styled.div`
 `;
 
 export const StatCard = styled.div`
-  background: linear-gradient(135deg, #f5f3ff, #e0e7ff);
+  background: linear-gradient(135deg, #dfd5fb, #f0eaff);
   border: 1px solid #ddd6fe;
   border-radius: 16px;
-  width: 220px;
-  height: 160px;
+  width: 100%;
+  height: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,19 +105,18 @@ export const StatCard = styled.div`
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.12);
   }
 `;
-
 export const StatNumber = styled.h3`
   font-size: 2rem;
   font-weight: 700;
-  color: #4f46e5;
+  color: #733eec;
   margin-bottom: 0.3rem;
 `;
 
 export const StatLabel = styled.p`
-  color: #475569;
+  color: #00000;
   font-weight: 500;
   font-size: 0.95rem;
   text-align: center;

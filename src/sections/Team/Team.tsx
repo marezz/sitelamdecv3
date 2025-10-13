@@ -1,8 +1,25 @@
 import React, { useState } from "react";
 import { members } from "../../components/membros/members";
 import type { Member } from "../../components/ui/interfacemember";
-import {  Section, SectionHeader, Title, Subtitle,
-  TeamGrid, MemberCard, MemberImage, MemberInfo, HoverCardContainer, HoverCardDropdown, HoverCardContent, HoverCardBio, HoverCardExpertise, HoverCardTitle, HoverCardBadges, Badge, HoverCardLinks } from "./styles";
+import {
+  Section,
+  SectionHeader,
+  Title,
+  Subtitle,
+  TeamGrid,
+  MemberCard,
+  MemberImage,
+  MemberInfo,
+  HoverCardContainer,
+  HoverCardDropdown,
+  HoverCardContent,
+  HoverCardBio,
+  HoverCardExpertise,
+  HoverCardTitle,
+  HoverCardBadges,
+  Badge,
+  HoverCardLinks,
+} from "./styles";
 
 interface TeamProps {
   title?: string;
@@ -18,7 +35,7 @@ const Team: React.FC<TeamProps> = ({
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
   return (
-    <Section>
+    <Section id="team">
       <SectionHeader>
         <Title>{title}</Title>
         <Subtitle>{subtitle}</Subtitle>
@@ -33,11 +50,7 @@ const Team: React.FC<TeamProps> = ({
           >
             <MemberCard>
               <MemberImage>
-                <img
-                  src={member.photo}
-                  alt={member.name}
-                />
-               
+                <img src={member.photo} alt={member.name} />
               </MemberImage>
 
               <MemberInfo>
