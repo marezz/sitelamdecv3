@@ -30,10 +30,9 @@ export const Subtitle = styled.p`
 export const TeamGrid = styled.div`
   display: grid;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
   margin: 0 auto;
-
-  grid-template-columns: repeat(4, 260px);
+  grid-template-columns: repeat(5, 12rem);
   max-width: calc(260px * 4 + 2rem * 3);
 
   @media (max-width: 1100px) {
@@ -60,7 +59,7 @@ export const MemberCard = styled.div`
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
-  height: 360px;
+  height: 100%;
   display: flex;
   flex-direction: column;
 
@@ -98,12 +97,14 @@ export const MemberImage = styled.div`
 `;
 
 export const MemberInfo = styled.div`
-  padding: 1.25rem;
+  padding: 1rem;
+  max-height: 10rem;
   text-align: center;
   background: #f9fafb;
 
   h3 {
-    font-size: 1.1rem;
+    font-size: clamp(0.5rem, 5vw, 0.95rem);
+    width: 100%;
     font-weight: 600;
     color: #1f2937;
     margin-bottom: 0.35rem;
@@ -163,7 +164,7 @@ export const HoverCardDropdown = styled.div`
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -8px;
     left: 50%;

@@ -92,7 +92,7 @@ function About() {
       </SectionContent>
 
       <Carousel
-        className="w-full"
+        className="w-full py-20"
         plugins={[
           Autoplay({
             delay: 2000,

@@ -21,6 +21,8 @@ const chartData = [
   { value: 100 },
 ];
 
+const iconsize = 25;
+
 const CustomDot = ({ cx, cy, payload, index }) => {
   if (!payload.highlight) return null;
 
@@ -44,7 +46,7 @@ const CustomDot = ({ cx, cy, payload, index }) => {
       <circle
         cx={cx}
         cy={cy}
-        r={20}
+        r={iconsize * 1.1}
         fill="#733EEC"
         opacity={0.2}
         className="float-animation"
@@ -53,7 +55,7 @@ const CustomDot = ({ cx, cy, payload, index }) => {
       <circle
         cx={cx}
         cy={cy}
-        r={14}
+        r={iconsize * 0.8}
         fill="white"
         stroke="#733EEC"
         strokeWidth={2}
@@ -61,14 +63,14 @@ const CustomDot = ({ cx, cy, payload, index }) => {
         style={{ animationDelay: `${animationDelay}s` }}
       />
       <foreignObject
-        x={cx - 10}
-        y={cy - 10}
-        width={20}
-        height={20}
+        x={cx - iconsize / 2}
+        y={cy - iconsize / 2}
+        width={iconsize}
+        height={iconsize}
         className="float-animation"
         style={{ animationDelay: `${animationDelay}s` }}
       >
-        <Icon size={20} color="#733EEC" />
+        <Icon size={iconsize} color="#733EEC" />
       </foreignObject>
     </g>
   );
@@ -76,9 +78,9 @@ const CustomDot = ({ cx, cy, payload, index }) => {
 
 function Hero() {
   return (
-    <div className="flex relative w-full p-25 overflow-hidden">
+    <div className="flex relative w-full p-30 overflow-hidden">
       {/* Conteúdo */}
-      <div className="relative z-10 flex flex-col gap-4 justify-center w-1/2">
+      <div className="relative z-10 flex flex-col gap-4 justify-center w-xl">
         <h1 className="font-bold text-5xl">
           Laboratório de Suporte à <span className="">Tomada de Decisões</span>
         </h1>
@@ -90,7 +92,9 @@ function Hero() {
 
         <div className="flex flex-row gap-2">
           <Button>Conheça nossos projetos</Button>
-          <Button variant="outline">Seja parceiro</Button>
+          <Button variant="outline" className="hover:bg-secondary">
+            Ver publicações
+          </Button>
         </div>
 
         <ul className="flex flex-col gap-2 mt-4">

@@ -17,7 +17,7 @@ function Header() {
   return (
     <div className="w-full flex flex-row justify-center items-center p-4 shadow-sm gap-50">
       <span className="flex flex-row gap-2 items-center">
-        <img src="public/lamdec.png" className="w-8 h-8" />
+        <img src="/lamdec.png" className="w-8 h-8" />
         <div>
           <h1 className="font-semibold">LAMDEC</h1>
         </div>
