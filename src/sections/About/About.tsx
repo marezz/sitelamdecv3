@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Book, BookOpenText, Check, Database, Lamp, Lightbulb, Users } from "lucide-react";
 import {
   Section,
   SectionHeader,
@@ -17,6 +17,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+
 
 import Autoplay from "embla-carousel-autoplay";
 
@@ -69,22 +70,34 @@ function About() {
         <SectionRight>
           <StatGrid>
             <StatCard>
-              <StatNumber>10+</StatNumber>
-              <StatLabel>Projetos Concluídos</StatLabel>
-            </StatCard>
-
-            <StatCard>
-              <StatNumber>3+</StatNumber>
-              <StatLabel>Parceiros Estratégicos</StatLabel>
-            </StatCard>
-
-            <StatCard>
-              <StatNumber>10+</StatNumber>
+              <div className="flex flex-row gap-4">
+                <Users className="h-full"/>
+                <StatNumber>20+</StatNumber>
+              </div> 
               <StatLabel>Membros da Equipe</StatLabel>
             </StatCard>
 
             <StatCard>
-              <StatNumber>50+</StatNumber>
+              <div className="flex flex-row gap-4">
+                <Lightbulb className="h-full"/>
+                <StatNumber>15+</StatNumber>
+              </div> 
+              <StatLabel>Projetos</StatLabel>
+            </StatCard>
+
+            <StatCard>
+              <div className="flex flex-row gap-4">
+                <Database className="h-full"/>
+                <StatNumber>10+</StatNumber>
+              </div> 
+              <StatLabel>Anos de Atuação</StatLabel>
+            </StatCard>
+
+            <StatCard>
+              <div className="flex flex-row gap-4">
+                <BookOpenText className="h-full"/>
+                <StatNumber>30+</StatNumber>
+              </div>
               <StatLabel>Publicações</StatLabel>
             </StatCard>
           </StatGrid>
@@ -92,14 +105,14 @@ function About() {
       </SectionContent>
 
       <Carousel
-        className="w-full py-20"
+        className="w-full pt-30 pb-10 w-full"
         plugins={[
           Autoplay({
             delay: 2000,
           }),
         ]}
       >
-        <CarouselContent className="flex gap-10 justify-center">
+        <CarouselContent className="flex gap-10 justify-center w-full">
           {logos.map((src, index) => (
             <CarouselItem key={index} className="flex-[0_0_20%]">
               <img

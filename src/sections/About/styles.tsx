@@ -91,7 +91,7 @@ export const StatGrid = styled.div`
 `;
 
 export const StatCard = styled.div`
-  background: linear-gradient(135deg, #dfd5fb, #f0eaff);
+  background: white;
   border: 1px solid #ddd6fe;
   border-radius: 16px;
   width: 100%;

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionItem,
@@ -14,88 +15,90 @@ import { Label } from "@/components/ui/label";
 
 interface Publicacao {
   titulo: string;
-  ano: number;
+  ano: string;
   link: string;
   autores: string;
-  local: string;
+  revista: string;
+  categoria: string;
 }
 
-const publicacoes: Publicacao[] = [
-  {
-    titulo:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models.",
-    ano: 2025,
-    link: "https://google.com",
-    autores: "Cunha, I. C., Silva, R. S.",
-    local:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models. Journal of Econometrics and Statistics, Vol. 5, Nº 1, 89-106",
-  },
-  {
-    titulo:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models.",
-    ano: 2025,
-    link: "https://google.com",
-    autores: "Cunha, I. C., Silva, R. S.",
-    local:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models. Journal of Econometrics and Statistics, Vol. 5, Nº 1, 89-106",
-  },
-  {
-    titulo:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models.",
-    ano: 2025,
-    link: "https://google.com",
-    autores: "Cunha, I. C., Silva, R. S.",
-    local:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models. Journal of Econometrics and Statistics, Vol. 5, Nº 1, 89-106",
-  },
-  {
-    titulo:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models.",
-    ano: 2025,
-    link: "https://google.com",
-    autores: "Cunha, I. C., Silva, R. S.",
-    local:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models. Journal of Econometrics and Statistics, Vol. 5, Nº 1, 89-106",
-  },
-  {
-    titulo:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models.",
-    ano: 2025,
-    link: "https://google.com",
-    autores: "Cunha, I. C., Silva, R. S.",
-    local:
-      "Particle Filters and Adaptive Metropolis-Hastings Sampling Applied to Volatitlity Models. Journal of Econometrics and Statistics, Vol. 5, Nº 1, 89-106",
-  },
-];
-
 function Publications() {
+  const [publicacoes, setPublicacoes] = useState<Publicacao[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwFKD65hgvS8k11S_LxiYKUlmo10H1daTj66m7afdoL9QD79KCWpXIsurx1ZouQijhQ/exec');
+        const data = await response.json();
+        setPublicacoes(data.Publicacoes || []);
+        setLoading(false);
+      } catch (err) {
+        setError('Erro ao carregar publicações');
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col gap-4 w-full px-25">
+        <Label className="font-bold text-4xl">Publicações</Label>
+        <div className="flex items-center justify-center py-12">
+          <p className="text-muted-foreground">Carregando publicações...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col gap-4 w-full px-25">
+        <Label className="font-bold text-4xl">Publicações</Label>
+        <div className="flex items-center justify-center py-12">
+          <p className="text-red-600">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
   // Agrupar publicações por ano
   const publicacoesPorAno = publicacoes.reduce((acc, pub) => {
-    if (!acc[pub.ano]) acc[pub.ano] = [];
-    acc[pub.ano].push(pub);
+    const ano = pub.ano.toString();
+    if (!acc[ano]) acc[ano] = [];
+    acc[ano].push(pub);
     return acc;
-  }, {} as Record<number, Publicacao[]>);
+  }, {} as Record<string, Publicacao[]>);
 
-  const anos = Object.keys(publicacoesPorAno)
-    .map(Number)
-    .sort((a, b) => b - a);
+  const anos = Object.keys(publicacoesPorAno).sort((a, b) => {
+    const aIsNumeric = !isNaN(Number(a));
+    const bIsNumeric = !isNaN(Number(b));
+    
+    if (!aIsNumeric && bIsNumeric) return -1;
+    if (aIsNumeric && !bIsNumeric) return 1;
+    if (!aIsNumeric && !bIsNumeric) return a.localeCompare(b);
+    
+    return Number(b) - Number(a);
+  });
+  const anoMaisRecente = anos[0] || '';
+
 
   return (
     <div
       id="projects"
-      className="flex flex-col gap-4 w-full px-25 overflow-x-auto"
+      className="flex flex-col gap-4 px-25 overflow-x-auto w-full transition-all"
     >
-      <Label className="font-bold text-4xl">Publicações</Label>
-      <Accordion type="multiple" className="h-fit" orientation="horizontal">
+      <Label className="flex flex-row font-bold text-4xl w-full">Publicações</Label>
+      <Accordion type="single" collapsible defaultValue={anoMaisRecente} className="h-fit pt-10 pb-20" orientation="horizontal">
         {anos.map((ano) => (
-          <AccordionItem key={ano} value={ano.toString()} className="h-fit">
-            <AccordionTrigger>{ano}</AccordionTrigger>
-            <AccordionContent className="w-full h-fit">
-              <Carousel>
-                <CarouselContent className="grid grid-cols-3 w-full">
+          <AccordionItem key={ano} value={ano} className="h-fit">
+            <AccordionTrigger className='text-xl'>{ano}</AccordionTrigger>
+            <AccordionContent className="grid grid-cols-3 w-full h-fit gap-4">
                   {publicacoesPorAno[ano].map((pub, idx) => (
-                    <CarouselItem key={idx}>
-                      <Card className="flex flex-col p-6 gap-3">
+                      <Card key={idx} className="flex flex-col p-6 gap-4 ">
                         <a
                           href={pub.link}
                           target="_blank"
@@ -109,14 +112,14 @@ function Publications() {
                             {pub.autores}
                           </p>
                           <p className="text-sm text-accent font-medium">
-                            {pub.local}
+                            {pub.revista}
                           </p>
+                          <span className="text-xs text-muted-foreground mt-1">
+                            {pub.categoria}
+                          </span>
                         </a>
                       </Card>
-                    </CarouselItem>
                   ))}
-                </CarouselContent>
-              </Carousel>
             </AccordionContent>
           </AccordionItem>
         ))}

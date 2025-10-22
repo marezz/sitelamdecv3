@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { AreaChart, Area, ResponsiveContainer, YAxis } from "recharts";
 import { TrendingUp, Award, Users, Brain, ChartNetwork } from "lucide-react";
+import scrollToSection from "@/sections/Header/header";
 
 const icones = [
   { id: 1, Icon: ChartNetwork, label: "Análise de Dados" },
