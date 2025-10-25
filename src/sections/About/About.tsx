@@ -1,24 +1,5 @@
-import { Book, BookOpenText, Check, Database, Lamp, Lightbulb, Users } from "lucide-react";
-import {
-  Section,
-  SectionHeader,
-  SectionContent,
-  SectionLeft,
-  SectionRight,
-  Title,
-  Description,
-  StatGrid,
-  StatCard,
-  StatNumber,
-  StatLabel,
-} from "./styles";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-
-
+import { BookOpenText, Check, Database, Lightbulb, Users } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
 const logos = [
@@ -32,17 +13,23 @@ const logos = [
   "https://upload.wikimedia.org/wikipedia/commons/f/f0/UFRJ_logo.svg",
 ];
 
-function About() {
+export default function About() {
   return (
-    <Section id="about">
-      <SectionHeader>
-        <Title>Sobre o LAMDEC</Title>
-        <Description>Excelência em pesquisa e inovação tecnológica</Description>
-      </SectionHeader>
-      <SectionContent>
-        <SectionLeft>
-          <h2>Nossa Missão</h2>
-          <p className="text-justify">
+    <section
+      id="about"
+      className="flex flex-col bg-white pt-24 pb-12 w-full"
+    >
+      <div className="flex flex-col text-left gap-2 px-25 mb-14">
+        <h2 className="text-5xl font-bold text-black text-center">Sobre o LAMDEC</h2>
+        <p className="text-[#6b6b8c] text-xl text-center">
+          Excelência em pesquisa e inovação tecnológica
+        </p>
+      </div>
+
+      <div className="flex flex-wrap justify-between items-start gap-16 w-full px-25">
+        <div className="flex-1 min-w-[380px] max-w-[520px] text-left">
+          <h2 className="text-4xl font-semibold mb-5 leading-tight">Nossa Missão</h2>
+          <p className="text-[#6b6b8c] mb-8 leading-relaxed text-lg">
             O LAMDEC é um laboratório de pesquisa dedicado ao desenvolvimento de
             métodos inovadores de suporte à tomada de decisão. Nossa equipe
             multidisciplinar trabalha em projetos que impactam positivamente a
@@ -50,62 +37,35 @@ function About() {
             órgãos públicos.
           </p>
 
-          <h2>Nossos Valores</h2>
-          <ul>
-            <li>
-              <Check size={16} /> Excelência em pesquisa
+          <h2 className="text-4xl font-semibold mb-5 leading-tight">Nossos Valores</h2>
+          <ul className="space-y-2 text-[#6b6b8c] font-normal text-lg">
+            <li className="flex items-center gap-2">
+              <Check size={18} className="text-indigo-600" /> Excelência em pesquisa
             </li>
-            <li>
-              <Check size={16} /> Métodos de suporte à decisão
+            <li className="flex items-center gap-2">
+              <Check size={18} className="text-indigo-600" /> Métodos de suporte à decisão
             </li>
-            <li>
-              <Check size={16} /> Colaboração interdisciplinar
+            <li className="flex items-center gap-2">
+              <Check size={18} className="text-indigo-600" /> Colaboração interdisciplinar
             </li>
-            <li>
-              <Check size={16} /> Impacto social e empresarial
+            <li className="flex items-center gap-2">
+              <Check size={18} className="text-indigo-600" /> Impacto social e empresarial
             </li>
           </ul>
-        </SectionLeft>
+        </div>
 
-        <SectionRight>
-          <StatGrid>
-            <StatCard>
-              <div className="flex flex-row gap-4">
-                <Users className="h-full"/>
-                <StatNumber>20+</StatNumber>
-              </div> 
-              <StatLabel>Membros da Equipe</StatLabel>
-            </StatCard>
-
-            <StatCard>
-              <div className="flex flex-row gap-4">
-                <Lightbulb className="h-full"/>
-                <StatNumber>15+</StatNumber>
-              </div> 
-              <StatLabel>Projetos</StatLabel>
-            </StatCard>
-
-            <StatCard>
-              <div className="flex flex-row gap-4">
-                <Database className="h-full"/>
-                <StatNumber>10+</StatNumber>
-              </div> 
-              <StatLabel>Anos de Atuação</StatLabel>
-            </StatCard>
-
-            <StatCard>
-              <div className="flex flex-row gap-4">
-                <BookOpenText className="h-full"/>
-                <StatNumber>30+</StatNumber>
-              </div>
-              <StatLabel>Publicações</StatLabel>
-            </StatCard>
-          </StatGrid>
-        </SectionRight>
-      </SectionContent>
+        <div className="flex-1 min-w-[380px] max-w-[600px] flex items-center justify-center">
+          <div className="grid grid-cols-2 gap-6 w-[32vw] max-w-[420px] sm:w-full">
+            <StatCard icon={<Users />} number="20+" label="Membros da Equipe" />
+            <StatCard icon={<Lightbulb />} number="15+" label="Projetos" />
+            <StatCard icon={<Database />} number="10+" label="Anos de Atuação" />
+            <StatCard icon={<BookOpenText />} number="30+" label="Publicações" />
+          </div>
+        </div>
+      </div>
 
       <Carousel
-        className="w-full pt-30 pb-10 w-full"
+        className="w-full pt-24 pb-12"
         plugins={[
           Autoplay({
             delay: 2000,
@@ -114,18 +74,36 @@ function About() {
       >
         <CarouselContent className="flex gap-10 justify-center w-full">
           {logos.map((src, index) => (
-            <CarouselItem key={index} className="flex-[0_0_20%]">
+            <CarouselItem key={index} className="flex-[0_0_20%] flex justify-center">
               <img
                 src={src}
                 alt={`logo-${index}`}
-                className="h-32 object-contain"
+                className="h-36 object-contain"
               />
             </CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>
-    </Section>
+    </section>
   );
 }
 
-export default About;
+function StatCard({
+  icon,
+  number,
+  label,
+}: {
+  icon: React.ReactNode;
+  number: string;
+  label: string;
+}) {
+  return (
+    <div className="bg-white border border-indigo-200 rounded-2xl w-full h-44 flex flex-col items-center justify-center shadow-md hover:-translate-y-1 hover:shadow-lg transition-all">
+      <div className="flex flex-row gap-4 items-center mb-2">
+        {icon}
+        <h3 className="text-3xl font-bold text-[#733eec]">{number}</h3>
+      </div>
+      <p className="text-black font-medium text-base text-center">{label}</p>
+    </div>
+  );
+}

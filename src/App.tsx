@@ -3,6 +3,7 @@ import About from "./sections/About/About";
 import Team from "./sections/Team/Team";
 import Header from "./sections/Header/header";
 import Footer from "./sections/Footer/Footer";
+import Contact from "./sections/Contact/Contact";
 import { Button } from "./components/ui/button";
 import { ArrowUp } from "lucide-react";
 import Publications from "./sections/Publications/publications";
@@ -23,6 +24,7 @@ function App() {
       >
         <ArrowUp className="text-[#733eec] w-full h-full" />
       </Button>
+      <Contact/>
       <Footer />
     </div>
   );
