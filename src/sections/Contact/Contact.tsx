@@ -1,76 +1,22 @@
-import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
+import { MapPin, Mail, ExternalLink } from "lucide-react";
 import { useState } from "react";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    position: "",
-    interest: "",
-    message: "",
-  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [isSubmitting] = useState(false);
+  const [success] = useState(false);
 
-  // Substituir este link pelo "formResponse" do seu Google Form
-  const GOOGLE_FORM_ACTION =
-    "https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse";
-
-  // Substituitr os entry IDs pelos IDs reais do seu Google Form
-  const GOOGLE_ENTRY_IDS = {
-    name: "entry.1111111111",
-    email: "entry.2222222222",
-    company: "entry.3333333333",
-    position: "entry.4444444444",
-    interest: "entry.5555555555",
-    message: "entry.6666666666",
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSuccess(false);
-
-    const formBody = new URLSearchParams({
-      [GOOGLE_ENTRY_IDS.name]: formData.name,
-      [GOOGLE_ENTRY_IDS.email]: formData.email,
-      [GOOGLE_ENTRY_IDS.company]: formData.company,
-      [GOOGLE_ENTRY_IDS.position]: formData.position,
-      [GOOGLE_ENTRY_IDS.interest]: formData.interest,
-      [GOOGLE_ENTRY_IDS.message]: formData.message,
-    });
-
-    try {
-      await fetch(GOOGLE_FORM_ACTION, {
-        method: "POST",
-        mode: "no-cors",
-        body: formBody,
-      });
-      setSuccess(true);
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        position: "",
-        interest: "",
-        message: "",
-      });
-    } catch (error) {
-      console.error("Erro ao enviar:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    const url = "https://script.google.com/macros/s/AKfycbzycCTtLz-6b-2JXJ0pB1fh9SjBCiRj_z7xn4BV4e0du35-dnxDzBzQ4OQBvXRT_fbI/exec"
+    fetch(url,{
+      method:"POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body:(`Name=${e.target.name.value}&Email=${e.target.email.value}&Organizacao=${e.target.organizacao.value}&AreaInteresse=${e.target.area.value}&Descricao=${e.target.descricao.value}`)
+    }).then(res=>res.text()).then(data=>{
+      alert(data)
+    }).catch(error=>console.log(error))
+  }
 
   return (
     <section
@@ -84,11 +30,10 @@ export default function Contact() {
         </p>
       </div>
 
-      {/* BLOCO PRINCIPAL: INFORMAÇÕES + FORMULÁRIO */}
       <div className="flex flex-wrap justify-between items-start gap-12 w-full">
-        {/* COLUNA ESQUERDA - Informações + Mapa */}
+
         <div className="flex-1 min-w-[380px] max-w-[550px] flex flex-col gap-8">
-          {/* Informações */}
+
           <div className="flex flex-col gap-6">
             <ContactItem
               icon={<MapPin className="text-indigo-600 w-6 h-6" />}
@@ -101,11 +46,6 @@ export default function Contact() {
                   Rio de Janeiro - RJ - Brasil<br />
                 </>
               }
-            />
-            <ContactItem
-              icon={<Phone className="text-indigo-600 w-6 h-6" />}
-              title="Telefone"
-              description="+55 (21) 99999-9999"
             />
             <ContactItem
               icon={<Mail className="text-indigo-600 w-6 h-6" />}
@@ -146,78 +86,35 @@ export default function Contact() {
 
           <form className="grid grid-cols-1 gap-4" onSubmit={handleSubmit}>
             <input
-              type="text"
-              name="name"
-              placeholder="Nome completo"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="E-mail corporativo"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-            <input
-              type="text"
-              name="company"
-              placeholder="Empresa"
-              required
-              value={formData.company}
-              onChange={handleChange}
-              className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-            <input
-              type="text"
-              name="position"
-              placeholder="Cargo"
-              required
-              value={formData.position}
-              onChange={handleChange}
-              className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-            <select
-              name="interest"
-              required
-              value={formData.interest}
-              onChange={handleChange}
-              className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-            >
-              <option value="">Área de interesse</option>
-              <option value="machine-learning">Machine Learning</option>
-              <option value="data-science">Data Science</option>
-              <option value="ai">Inteligência Artificial</option>
-              <option value="analytics">Analytics</option>
-              <option value="other">Outro</option>
-            </select>
-            <textarea
-              name="message"
-              placeholder="Descreva seu projeto ou necessidade"
-              rows={4}
-              required
-              value={formData.message}
-              onChange={handleChange}
-              className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-            <button
-              type="submit"
+          name='name'
+          placeholder='Nome Completo'
+          className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"
+          />
+          <input name='email'
+          placeholder='E-mail'
+          className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"/>
+          <input name='organizacao'
+          placeholder='Organização'
+          className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"/>
+          <input name='atuacao'
+          placeholder='Área de Interesse'
+          className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"/>
+          <textarea name='descricao'
+          placeholder='Descreva seu projeto ou necessidade'
+          className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"/>
+          <button
+            type="submit"
               disabled={isSubmitting}
               className="bg-indigo-600 text-white font-medium py-3 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50"
             >
               {isSubmitting ? "Enviando..." : "Enviar Proposta"}
             </button>
-          </form>
-
-          {success && (
+        </form>
+        {success && (
             <p className="text-green-600 mt-4 text-lg">
               ✅ Sua proposta foi enviada com sucesso!
             </p>
-          )}
+        )}
         </div>
       </div>
     </section>
