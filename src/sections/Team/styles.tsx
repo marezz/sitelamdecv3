@@ -13,6 +13,8 @@ export const Section = styled.section`
 
 export const SectionHeader = styled.div`
   margin-bottom: 3rem;
+  flex: 1;
+  justify-items: center;
 `;
 
 export const Title = styled.h2`
@@ -23,7 +25,9 @@ export const Title = styled.h2`
 
 export const Subtitle = styled.p`
   color: #64748b;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  width: 50%;
+  text-align: center;
   margin-top: 0.5rem;
 `;
 

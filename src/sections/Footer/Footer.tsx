@@ -1,5 +1,13 @@
 import React from "react";
-import { FooterWrapper, FooterContainer, FooterContent, FooterSection, FooterBottom, SocialLinks, FooterList } from "./styles";
+import {
+  FooterWrapper,
+  FooterContainer,
+  FooterContent,
+  FooterSection,
+  FooterBottom,
+  SocialLinks,
+  FooterList,
+} from "./styles";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer: React.FC = () => {
@@ -11,18 +19,30 @@ const Footer: React.FC = () => {
             <h3>LAMDEC</h3>
             <p>Laboratório de Métodos de Suporte à Tomada de Decisão</p>
             <SocialLinks>
-              <a href="#"><FaLinkedin /></a>
-              <a href="#"><FaGithub /></a>
+              <a href="#">
+                <FaLinkedin />
+              </a>
+              <a href="#">
+                <FaGithub />
+              </a>
             </SocialLinks>
           </FooterSection>
 
           <FooterSection>
             <h4>Links Rápidos</h4>
             <FooterList>
-              <li><a href="#about">Sobre</a></li>
-              <li><a href="#team">Equipe</a></li>
-              <li><a href="#projects">Projetos</a></li>
-              <li><a href="#partnerships">Parcerias</a></li>
+              <li>
+                <a href="#about">Sobre</a>
+              </li>
+              <li>
+                <a href="#team">Equipe</a>
+              </li>
+              <li>
+                <a href="#publications">Publicações</a>
+              </li>
+              <li>
+                <a href="#projects">Projetos</a>
+              </li>
             </FooterList>
           </FooterSection>
 
@@ -40,7 +60,8 @@ const Footer: React.FC = () => {
             <h4>Contato</h4>
             <p>lamdec@im.ufrj.br</p>
             <p>
-              UFRJ - CT, Ilha do Fundão<br />
+              UFRJ - CT, Ilha do Fundão
+              <br />
               Rio de Janeiro, RJ - Brasil
             </p>
           </FooterSection>

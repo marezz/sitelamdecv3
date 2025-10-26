@@ -32,7 +32,6 @@ const Team: React.FC<TeamProps> = ({
   subtitle = "Nossa equipe multidisciplinar combina expertise em matemática, ciência da computação e conhecimentos específicos de domínio para entregar soluções inovadoras.",
   data = members,
 }) => {
-  
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
   return (
