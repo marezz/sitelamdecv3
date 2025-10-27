@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import type { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 import { AreaChart, Area, ResponsiveContainer, YAxis } from "recharts";
 import { TrendingUp, Award, Users, Brain, ChartNetwork } from "lucide-react";
 
@@ -109,9 +110,12 @@ function Hero() {
         </p>
 
         <div className="flex flex-row gap-2">
-          <Button>Conheça nossos projetos</Button>
-          <Button variant="outline" className="hover:bg-secondary">
-            Ver publicações
+          <Button asChild>
+          <a href="#projects">Conheça nossos projetos</a>
+          </Button>
+
+          <Button asChild variant="outline" className="hover:bg-secondary">
+          <a href="#publications">Ver publicações</a>
           </Button>
         </div>
 

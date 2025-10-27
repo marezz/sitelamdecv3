@@ -21,7 +21,7 @@ function Header() {
       </Link>
       <span className="flex flex-row gap-4 text-[#64748b]">
         {navItems.map((item) => (
-          <a href={`/#${item.id}`}>
+          <a href={`/v3/#${item.id}`}>
             <h3
               key={item.id}
               className="cursor-pointer hover:text-black transition-colors"

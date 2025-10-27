@@ -15,7 +15,7 @@ export default function Publications() {
   if (loading) {
     return (
       <div className="flex flex-col gap-4 w-full px-25">
-        <Label className="font-bold text-4xl">Publicações</Label>
+        <Label className="font-bold text-4xl">Pesquisa</Label>
         <div className="flex items-center justify-center py-12">
           <p className="text-muted-foreground">Carregando publicações...</p>
         </div>
@@ -48,15 +48,17 @@ export default function Publications() {
   );
 
   const anos = Object.keys(publicacoesPorAno).sort((a, b) => {
-    const aIsNumeric = !isNaN(Number(a));
-    const bIsNumeric = !isNaN(Number(b));
+    const aNum = Number(a);
+    const bNum = Number(b);
 
-    if (!aIsNumeric && bIsNumeric) return -1;
-    if (aIsNumeric && !bIsNumeric) return 1;
-    if (!aIsNumeric && !bIsNumeric) return a.localeCompare(b);
+    const aIsNum = !isNaN(aNum);
+    const bIsNum = !isNaN(bNum);
 
-    return Number(b) - Number(a);
-  });
+    if (aIsNum && bIsNum) return bNum - aNum;
+    if (aIsNum && !bIsNum) return -1;
+    if (!aIsNum && bIsNum) return 1;
+    return a.localeCompare(b);
+});
   const anoMaisRecente = anos[0] || "";
 
   return (
@@ -65,7 +67,7 @@ export default function Publications() {
       className="flex flex-col gap-4 px-25 overflow-x-auto w-full transition-all"
     >
       <Label className="flex flex-row font-bold text-4xl w-full">
-        Publicações
+        Pesquisas
       </Label>
       <Accordion
         type="single"

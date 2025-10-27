@@ -8,9 +8,9 @@ export default function Contact() {
   const [success, setSuccess] = useState(false);
 
 
-  const SERVICE_ID = "service_jaufouk";
-  const TEMPLATE_ID = "template_4lbp0vt";
-  const PUBLIC_KEY = "guZQZtdKbsbTm9Ok2";
+  const SERVICE_ID = "service_la5kwc3";
+  const TEMPLATE_ID = "template_154grcw";
+  const PUBLIC_KEY = "tnK28CCKtWBZqxDYl";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -125,7 +125,7 @@ function ContactInfo() {
       <ContactItem
         icon={<Mail className="text-indigo-600 w-6 h-6" />}
         title="E-mail"
-        description="lamdec@im.ufrj.br"
+        description="contato@lamdec.org"
       />
     </div>
   );

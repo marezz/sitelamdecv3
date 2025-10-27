@@ -69,16 +69,16 @@ export default function About() {
         {/* Cards */}
         <div className="flex-1 min-w-[380px] max-w-[600px] flex items-center justify-center">
           <div className="grid grid-cols-2 gap-4 w-[32vw] max-w-4/5 sm:w-full">
-            <StatCard icon={<Users />} number="20+" label="Membros da Equipe" />
-            <StatCard icon={<Lightbulb />} number="15+" label="Projetos" />
+            <StatCard icon={<Users />} number="15+" label="Membros da Equipe" />
+            <StatCard icon={<Lightbulb />} number="3+" label="Projetos" />
             <StatCard
               icon={<Database />}
-              number="10+"
+              number="3+"
               label="Anos de Atuação"
             />
             <StatCard
               icon={<BookOpenText />}
-              number="30+"
+              number="15+"
               label="Publicações"
             />
           </div>
