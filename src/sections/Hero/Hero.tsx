@@ -79,7 +79,7 @@ const CustomDot = ({ cx, cy, payload, index }) => {
 
 function Hero() {
   return (
-    <div className="flex relative w-full p-40 overflow-hidden">
+    <div className="flex relative w-full p-25 overflow-hidden">
       {/* Conteúdo */}
       <div className="relative z-10 flex flex-col gap-4 justify-center w-xl">
         <h1 className="font-bold text-5xl">

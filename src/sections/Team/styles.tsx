@@ -88,15 +88,18 @@ export const MemberCard = styled.div`
 `;
 
 export const MemberImage = styled.div`
-  position: relative;
+  width: 100%;
+  height: 200px;
   overflow: hidden;
-  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
   }
 `;
 
@@ -150,13 +153,13 @@ export const HoverCardDropdown = styled.div`
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: 350px;
-  max-width: 90vw;
+  width: 270px;
+  max-width: 85vw;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  padding: 1.5rem;
-  margin-top: 0.5rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  padding: 0.85rem;
+  margin-top: 0.35rem;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.18s ease, visibility 0.18s ease;
@@ -170,16 +173,15 @@ export const HoverCardDropdown = styled.div`
   &::before {
     content: "";
     position: absolute;
-    top: -8px;
+    top: -7px;
     left: 50%;
     transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid white;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid white;
   }
 `;
+
 
 export const HoverCardContent = styled.div`
   display: flex;
@@ -188,9 +190,9 @@ export const HoverCardContent = styled.div`
 `;
 
 export const HoverCardBio = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #374151;
-  line-height: 1.4;
+  line-height: 1.3;
   margin: 0;
 `;
 
@@ -210,18 +212,19 @@ export const HoverCardTitle = styled.h4`
 export const HoverCardBadges = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
 `;
 
 export const Badge = styled.span`
   display: inline-block;
-  padding: 0.25rem 0.75rem;
+  padding: 0.18rem 0.6rem; 
   background: #eff6ff;
   color: #4f46e5;
-  border-radius: 12px;
-  font-size: 0.8rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
   font-weight: 500;
 `;
+
 
 export const HoverCardLinks = styled.div`
   display: flex;

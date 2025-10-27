@@ -1,13 +1,10 @@
 export interface Member {
   name: string;
   role: string;
-  imageText?: string;
-  photo?: string;
-  linkedin?: string;
-  orcid?: string;
-  email?: string;
+  photo: string;
   bio?: string;
   expertise?: string[];
-  lattes?: string;
+  linkedin?: string;
   github?: string;
+  lattes?: string;
 }

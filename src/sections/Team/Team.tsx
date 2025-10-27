@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { members } from "../../components/membros/members";
+import React, { useEffect, useState } from "react";
 import type { Member } from "../../components/ui/interfacemember";
+import { getEquipe } from "../../data/api";
 import {
   Section,
   SectionHeader,
@@ -21,28 +21,68 @@ import {
   HoverCardLinks,
 } from "./styles";
 
-interface TeamProps {
-  title?: string;
-  subtitle?: string;
-  data?: Member[];
-}
-
-const Team: React.FC<TeamProps> = ({
-  title = "Nossa Equipe",
-  subtitle = "Nossa equipe multidisciplinar combina expertise em matemática, ciência da computação e conhecimentos específicos de domínio para entregar soluções inovadoras.",
-  data = members,
-}) => {
+const Team: React.FC = () => {
+  const [team, setTeam] = useState<Member[]>([]);
+  const [loading, setLoading] = useState(true);
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getEquipe();
+
+        const formatted = data.map((m: any) => ({
+          name: m.nome,
+          role: m.cargo,
+          photo: m.foto || "/placeholder.jpg",
+          bio: m.descricao,
+          expertise:
+            typeof m.expertise === "string"
+              ? m.expertise
+                  .split(/[|]/) 
+                  .map((e: string) => e.trim())
+                  .filter(Boolean)
+              : [],
+          linkedin: m.linkedin,
+          github: m.github,
+          lattes: m.lattes,
+        }));
+
+        setTeam(formatted);
+      } catch (error) {
+        console.error("Erro ao carregar equipe:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <Section id="team">
+        <SectionHeader>
+          <Title>Nossa Equipe</Title>
+          <Subtitle>Carregando equipe...</Subtitle>
+        </SectionHeader>
+      </Section>
+    );
+  }
 
   return (
     <Section id="team">
       <SectionHeader>
-        <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
+        <Title>Nossa Equipe</Title>
+        <Subtitle>
+          Nossa equipe multidisciplinar combina expertise em matemática, ciência
+          da computação e conhecimentos específicos de domínio para entregar
+          soluções inovadoras.
+        </Subtitle>
       </SectionHeader>
 
       <TeamGrid>
-        {data.map((member, index) => (
+        {team.map((member, index) => (
           <HoverCardContainer
             key={index}
             onMouseEnter={() => setHoveredMember(index)}
@@ -59,7 +99,7 @@ const Team: React.FC<TeamProps> = ({
               </MemberInfo>
             </MemberCard>
 
-            {(member.bio || member.expertise) && (
+            {(member.bio || member.expertise?.length) && (
               <HoverCardDropdown
                 className={hoveredMember === index ? "visible" : ""}
               >
@@ -70,8 +110,8 @@ const Team: React.FC<TeamProps> = ({
                     <HoverCardExpertise>
                       <HoverCardTitle>Especialidades:</HoverCardTitle>
                       <HoverCardBadges>
-                        {member.expertise.map((skill, skillIndex) => (
-                          <Badge key={skillIndex}>{skill}</Badge>
+                        {member.expertise.map((skill, i) => (
+                          <Badge key={i}>{skill}</Badge>
                         ))}
                       </HoverCardBadges>
                     </HoverCardExpertise>

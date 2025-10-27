@@ -6,7 +6,7 @@ function Header() {
     { label: "Equipe", id: "team" },
     { label: "Projetos", id: "projects" },
     { label: "Publicações", id: "publications" },
-    { label: "Contato", id: "contato" },
+    { label: "Contato", id: "contact" },
   ];
 
   return (

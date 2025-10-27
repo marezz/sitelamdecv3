@@ -6,45 +6,81 @@ import { useData } from "@/context/DataContext";
 export default function ProjetoTemplate() {
   const { slug } = useParams<{ slug: string }>();
   const { projects, loading } = useData();
-  console.log("projects:", projects, "slug:", slug);
 
-  if (loading) return <div className="p-10">Carregando...</div>;
+  if (loading)
+    return (
+      <div className="flex flex-col items-center justify-center py-32">
+        <p className="text-lg text-gray-500 animate-pulse">Carregando projeto...</p>
+      </div>
+    );
 
   const projeto = projects.find((p) => p.slug === slug);
-  if (!projeto) return <div className="p-10">Projeto não encontrado.</div>;
+  if (!projeto)
+    return (
+      <div className="flex flex-col items-center justify-center py-32">
+        <p className="text-lg text-gray-500">Projeto não encontrado.</p>
+      </div>
+    );
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0 bg-gradient-to-b from-[#f9f9ff] to-white min-h-screen">
       <Header />
-      <div className="flex flex-col p-10 gap-10">
+
+      <div className="relative w-full h-[400px] overflow-hidden">
         <img
           src={projeto.image}
           alt={projeto.title}
-          className="h-100 object-cover rounded-md"
+          className="w-full h-full object-cover brightness-[0.8]"
         />
-        <div className="grid grid-cols-2 py-2">
-          <div className="flex flex-col gap-4">
-            <Label className="font-bold text-4xl">{projeto.title}</Label>
-            <p className="text-xl font-[350]">{projeto.description}</p>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-10">
+          <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg">
+            {projeto.title}
+          </h1>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:grid md:grid-cols-3 gap-10 p-10 md:px-24">
+        <div className="md:col-span-2 flex flex-col gap-6">
+          <p className="text-lg text-gray-700 leading-relaxed">
+            {projeto.description}
+          </p>
+
+          <div className="h-[1px] w-full bg-gray-200 my-2" />
+
+          <div className="prose max-w-none text-justify text-gray-800 leading-relaxed">
+            {projeto.content || (
+              <p className="italic text-gray-500">
+                Este projeto ainda não possui conteúdo detalhado.
+              </p>
+            )}
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <p className="text-[#733eec] font-medium text-md">
-              Data: {projeto.date}
-            </p>
-            <Label className="text-xl font-normal">Participantes</Label>
-            <ul className="flex gap-1 flex-wrap justify-end">
+        </div>
+
+        {/* Coluna lateral */}
+        <aside className="flex flex-col gap-6 border-l border-gray-200 pl-6">
+          <div>
+            <Label className="text-[#733eec] text-sm uppercase tracking-wide font-semibold">
+              Data
+            </Label>
+            <p className="text-gray-700 text-base">{projeto.date}</p>
+          </div>
+
+          <div>
+            <Label className="text-[#733eec] text-sm uppercase tracking-wide font-semibold">
+              Participantes
+            </Label>
+            <ul className="flex flex-wrap gap-2 mt-2">
               {projeto.participants.map((p) => (
                 <li
                   key={p}
-                  className="px-4 border rounded-full text-[#6b6b8c] shadow-xs"
+                  className="px-3 py-1 bg-[#f3f0ff] text-[#5b3de3] rounded-full text-sm font-medium"
                 >
                   {p}
                 </li>
               ))}
             </ul>
           </div>
-        </div>
-        <p className="text-justify">{projeto.content}</p>
+        </aside>
       </div>
     </div>
   );
