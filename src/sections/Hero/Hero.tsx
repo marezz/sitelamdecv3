@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
+import type { FunctionComponent } from "react";
 import { AreaChart, Area, ResponsiveContainer, YAxis } from "recharts";
 import { TrendingUp, Award, Users, Brain, ChartNetwork } from "lucide-react";
-import scrollToSection from "@/sections/Header/header";
 
 const icones = [
   { id: 1, Icon: ChartNetwork, label: "Análise de Dados" },
@@ -24,8 +24,23 @@ const chartData = [
 
 const iconsize = 25;
 
-const CustomDot = ({ cx, cy, payload, index }) => {
-  if (!payload.highlight) return null;
+type CustomDotProps = {
+  cx?: number;
+  cy?: number;
+  index?: number;
+  payload?: {
+    highlight?: boolean;
+    icon?: string | number;
+  };
+};
+
+const CustomDot: FunctionComponent<CustomDotProps> = ({
+  cx,
+  cy,
+  payload,
+  index = 0,
+}) => {
+  if (!payload?.highlight) return null;
 
   const found = icones.find((item) => item.id === Number(payload.icon));
   const Icon = found ? found.Icon : TrendingUp;
@@ -44,6 +59,7 @@ const CustomDot = ({ cx, cy, payload, index }) => {
           }
         `}
       </style>
+
       <circle
         cx={cx}
         cy={cy}
@@ -64,8 +80,8 @@ const CustomDot = ({ cx, cy, payload, index }) => {
         style={{ animationDelay: `${animationDelay}s` }}
       />
       <foreignObject
-        x={cx - iconsize / 2}
-        y={cy - iconsize / 2}
+        x={(cx ?? 0) - iconsize / 2}
+        y={(cy ?? 0) - iconsize / 2}
         width={iconsize}
         height={iconsize}
         className="float-animation"
@@ -80,11 +96,12 @@ const CustomDot = ({ cx, cy, payload, index }) => {
 function Hero() {
   return (
     <div className="flex relative w-full p-25 overflow-hidden">
-      {/* Conteúdo */}
       <div className="relative z-10 flex flex-col gap-4 justify-center w-xl">
         <h1 className="font-bold text-5xl">
-          Laboratório de Suporte à <span className="">Tomada de Decisões</span>
+          Laboratório de Suporte à{" "}
+          <span className="text-[#733EEC]">Tomada de Decisões</span>
         </h1>
+
         <p className="text-[#6b6b8c] text-xl font-[350]">
           Desenvolvemos métodos inovadores de suporte à tomada de decisão
           através de pesquisa aplicada, soluções tecnológicas e parcerias
@@ -111,7 +128,6 @@ function Hero() {
         </ul>
       </div>
 
-      {/* Gráfico de fundo */}
       <div className="absolute right-0 top-0 bottom-0 w-1/2 z-0">
         <ResponsiveContainer width="105%" height="100%">
           <AreaChart

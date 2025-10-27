@@ -10,14 +10,27 @@ export async function fetchFromSheet<T>(tipo: string): Promise<T[]> {
   return json[tipo] || [];
 }
 
+function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .normalize("NFD") // remove acentos
+    .replace(/[\u0300-\u036f]/g, "") // remove diacríticos
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
+
 export async function getProjects(): Promise<Project[]> {
   const res = await fetch(`${BASE_URL}?tipo=Projetos`);
   const json = await res.json();
-  return (json.Projetos || []).map((p) => ({
+  return (json.Projetos || []).map((p: any): Project => ({
     ...p,
     participants: Array.isArray(p.participants)
       ? p.participants
-      : p.participants?.split(",").map((x) => x.trim()) || [],
+      : (p.participants?.split(",").map((x: string) => x.trim()) ?? []),
     id: p.id || slugify(p.slug || p.title),
   }));
 }

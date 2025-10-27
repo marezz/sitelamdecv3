@@ -4,8 +4,8 @@ import {
   useContext,
   useEffect,
   useState,
-  ReactNode,
 } from "react";
+import type { ReactNode } from "react";
 import type { Project, Publicacao, Equipe } from "@/data/types";
 import { getProjects, getPublicacao, getEquipe } from "@/data/api";
 

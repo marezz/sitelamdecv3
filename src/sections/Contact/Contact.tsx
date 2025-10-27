@@ -1,4 +1,5 @@
-import { useState, ReactNode } from "react";
+import { useState} from "react";
+import type { ReactNode } from "react";
 import { MapPin, Mail, ExternalLink } from "lucide-react";
 import emailjs from "emailjs-com";
 
