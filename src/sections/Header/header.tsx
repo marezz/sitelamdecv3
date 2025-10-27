@@ -13,7 +13,7 @@ function Header() {
     <div className="w-full flex flex-row justify-center items-center p-4 shadow-sm gap-50">
       <Link to={"/"}>
         <span className="flex flex-row gap-2 items-center">
-          <img src="/lamdec.png" className="w-8 h-8" />
+          <img src="/v3/lamdec.png" className="w-8 h-8" />
           <div>
             <h1 className="font-semibold">LAMDEC</h1>
           </div>

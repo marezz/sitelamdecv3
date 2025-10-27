@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import type { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
 import { AreaChart, Area, ResponsiveContainer, YAxis } from "recharts";
 import { TrendingUp, Award, Users, Brain, ChartNetwork } from "lucide-react";
 
