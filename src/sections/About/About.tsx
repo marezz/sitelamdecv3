@@ -125,7 +125,7 @@ function StatCard({
   label: string;
 }) {
   return (
-    <div className="bg-white border-2 border-[#5326d95b] rounded-2xl w-full h-full p-10 flex flex-col items-center justify-center hover:-translate-y-1 hover:shadow-md transition-all">
+    <div className="bg-white border rounded-2xl w-full h-full p-10 flex flex-col items-center justify-center hover:-translate-y-1 hover:shadow-sm transition-all">
       <div className="flex flex-row gap-4 justify-between items-center mb-2">
         {icon}
         <h3 className="text-3xl font-bold text-[#733eec]">{number}</h3>

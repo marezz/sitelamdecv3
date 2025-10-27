@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Accordion,
   AccordionItem,
@@ -6,44 +6,12 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
+import { useData } from "@/context/DataContext";
+import type { Publicacao } from "@/data/types";
 
-interface Publicacao {
-  titulo: string;
-  ano: string;
-  link: string;
-  autores: string;
-  revista: string;
-  categoria: string;
-}
-
-function Publications() {
-  const [publicacoes, setPublicacoes] = useState<Publicacao[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://script.google.com/macros/s/AKfycbwFKD65hgvS8k11S_LxiYKUlmo10H1daTj66m7afdoL9QD79KCWpXIsurx1ZouQijhQ/exec"
-        );
-        const data = await response.json();
-        setPublicacoes(data.Publicacoes || []);
-        setLoading(false);
-      } catch (err) {
-        setError("Erro ao carregar publicações");
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+export default function Publications() {
+  const { publicacoes, loading } = useData();
 
   if (loading) {
     return (
@@ -56,24 +24,29 @@ function Publications() {
     );
   }
 
-  if (error) {
+  if (!publicacoes || publicacoes.length === 0) {
     return (
       <div className="flex flex-col gap-4 w-full px-25">
         <Label className="font-bold text-4xl">Publicações</Label>
         <div className="flex items-center justify-center py-12">
-          <p className="text-red-600">{error}</p>
+          <p className="text-muted-foreground">
+            Nenhuma publicação encontrada.
+          </p>
         </div>
       </div>
     );
   }
 
-  // Agrupar publicações por ano
-  const publicacoesPorAno = publicacoes.reduce((acc, pub) => {
-    const ano = pub.ano.toString();
-    if (!acc[ano]) acc[ano] = [];
-    acc[ano].push(pub);
-    return acc;
-  }, {} as Record<string, Publicacao[]>);
+  // Agrupar por ano
+  const publicacoesPorAno = publicacoes.reduce(
+    (acc: Record<string, Publicacao[]>, pub) => {
+      const ano = pub.ano.toString();
+      if (!acc[ano]) acc[ano] = [];
+      acc[ano].push(pub);
+      return acc;
+    },
+    {}
+  );
 
   const anos = Object.keys(publicacoesPorAno).sort((a, b) => {
     const aIsNumeric = !isNaN(Number(a));
@@ -105,9 +78,12 @@ function Publications() {
         {anos.map((ano) => (
           <AccordionItem key={ano} value={ano} className="h-fit">
             <AccordionTrigger className="text-xl">{ano}</AccordionTrigger>
-            <AccordionContent className="grid grid-cols-3 w-full h-fit gap-4">
+            <AccordionContent className="grid grid-cols-3 w-full h-fit py-4 gap-4">
               {publicacoesPorAno[ano].map((pub, idx) => (
-                <Card key={idx} className="flex flex-col p-6 gap-4 ">
+                <Card
+                  key={idx}
+                  className="flex flex-col p-6 gap-4 hover:-translate-y-1 hover:shadow-sm transition-all"
+                >
                   <a
                     href={pub.link}
                     target="_blank"
@@ -136,5 +112,3 @@ function Publications() {
     </div>
   );
 }
-
-export default Publications;

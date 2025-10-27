@@ -1,69 +1,51 @@
-import { Card } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { useParams } from "react-router-dom";
+import Header from "@/sections/Header/header";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { useData } from "@/context/DataContext";
 
-function ProjetoTemplate() {
-  const projects = [
-    {
-      id: 1,
-      image: "https://lamdec.org/dash.png",
-      title: "CredRank",
-      description:
-        "Dashboard interativo para visualização da análise, classificação e ordenação dos devedores da capital do Rio de Janeiro.",
-      date: "Jan. 2024",
-    },
-    {
-      id: 2,
-      image: "https://lamdec.org/dash.png",
-      title: "ExxonMobil",
-      description:
-        "Dashboard interativo para visualização da análise, classificação e ordenação dos devedores da capital do Rio de Janeiro.",
-      date: "Jan. 2024",
-    },
-    {
-      id: 3,
-      image: "https://lamdec.org/dash.png",
-      title: "PGM ChatBot",
-      description:
-        "Dashboard interativo para visualização da análise, classificação e ordenação dos devedores da capital do Rio de Janeiro.",
-      date: "Jan. 2024",
-    },
-  ];
+export default function ProjetoTemplate() {
+  const { slug } = useParams<{ slug: string }>();
+  const { projects, loading } = useData();
+  console.log("projects:", projects, "slug:", slug);
+
+  if (loading) return <div className="p-10">Carregando...</div>;
+
+  const projeto = projects.find((p) => p.slug === slug);
+  if (!projeto) return <div className="p-10">Projeto não encontrado.</div>;
 
   return (
-    <div className="flex flex-col w-full px-25 gap-15">
-      <Label className="text-4xl font-bold">Projetos</Label>
-      <div className="">
-        <Carousel>
-          <CarouselContent>
-            {projects.map((project) => (
-              <CarouselItem key={project.id} className="basis-1/3">
-                <Link to={"/"}>
-                  <Card className="gap-4">
-                    <img src={project.image} alt={project.title} />
-                    <Label className="font-semibold text-xl">
-                      {project.title}
-                    </Label>
-                    <p className="text-[#6b6b8c] font-[350] text-md">
-                      {project.description}
-                    </p>
-                    <p className="text-[#733eec] font-medium text-md">
-                      {project.date}
-                    </p>
-                  </Card>
-                </Link>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+    <div className="flex flex-col gap-2">
+      <Header />
+      <div className="flex flex-col p-10 gap-10">
+        <img
+          src={projeto.image}
+          alt={projeto.title}
+          className="h-100 object-cover rounded-md"
+        />
+        <div className="grid grid-cols-2 py-2">
+          <div className="flex flex-col gap-4">
+            <Label className="font-bold text-4xl">{projeto.title}</Label>
+            <p className="text-xl font-[350]">{projeto.description}</p>
+          </div>
+          <div className="flex flex-col items-end gap-2">
+            <p className="text-[#733eec] font-medium text-md">
+              Data: {projeto.date}
+            </p>
+            <Label className="text-xl font-normal">Participantes</Label>
+            <ul className="flex gap-1 flex-wrap justify-end">
+              {projeto.participants.map((p) => (
+                <li
+                  key={p}
+                  className="px-4 border rounded-full text-[#6b6b8c] shadow-xs"
+                >
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p className="text-justify">{projeto.content}</p>
       </div>
     </div>
   );
 }
-
-export default ProjetoTemplate;

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   const navItems = [
     { label: "Sobre", id: "about" },
@@ -7,30 +9,26 @@ function Header() {
     { label: "Contato", id: "contato" },
   ];
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  };
-
   return (
     <div className="w-full flex flex-row justify-center items-center p-4 shadow-sm gap-50">
-      <span className="flex flex-row gap-2 items-center">
-        <img src="/lamdec.png" className="w-8 h-8" />
-        <div>
-          <h1 className="font-semibold">LAMDEC</h1>
-        </div>
-      </span>
+      <Link to={"/"}>
+        <span className="flex flex-row gap-2 items-center">
+          <img src="/lamdec.png" className="w-8 h-8" />
+          <div>
+            <h1 className="font-semibold">LAMDEC</h1>
+          </div>
+        </span>
+      </Link>
       <span className="flex flex-row gap-4 text-[#64748b]">
         {navItems.map((item) => (
-          <h3
-            key={item.id}
-            onClick={() => scrollToSection(item.id)}
-            className="cursor-pointer hover:text-black transition-colors"
-          >
-            {item.label}
-          </h3>
+          <a href={`/#${item.id}`}>
+            <h3
+              key={item.id}
+              className="cursor-pointer hover:text-black transition-colors"
+            >
+              {item.label}
+            </h3>
+          </a>
         ))}
       </span>
     </div>
