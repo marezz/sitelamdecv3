@@ -95,30 +95,30 @@ const CustomDot: FunctionComponent<CustomDotProps> = ({
 
 function Hero() {
   return (
-    <div className="flex relative w-full p-25 overflow-hidden">
-      <div className="relative z-10 flex flex-col gap-4 justify-center w-xl">
-        <h1 className="font-bold text-5xl">
+    <div className="relative flex flex-col lg:flex-row w-full p-6 md:p-12 lg:p-25 overflow-hidden">
+      <div className="relative z-10 flex flex-col gap-4 justify-center w-full lg:w-[50%] text-center lg:text-left">
+        <h1 className="font-bold text-4xl md:text-5xl">
           Laboratório de Suporte à{" "}
           <span className="text-[#733EEC]">Tomada de Decisões</span>
         </h1>
 
-        <p className="text-[#6b6b8c] text-xl font-[350]">
+        <p className="text-[#6b6b8c] text-lg md:text-xl font-[350]">
           Desenvolvemos métodos inovadores de suporte à tomada de decisão
           através de pesquisa aplicada, soluções tecnológicas e parcerias
           estratégicas com diversos parceiros!
         </p>
 
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
           <Button asChild>
-          <a href="#projects">Conheça nossos projetos</a>
+            <a href="#projects">Conheça nossos projetos</a>
           </Button>
 
           <Button asChild variant="outline" className="hover:bg-secondary">
-          <a href="#publications">Ver publicações</a>
+            <a href="#publications">Ver publicações</a>
           </Button>
         </div>
 
-        <ul className="flex flex-col gap-2 mt-4">
+        <ul className="flex flex-col gap-2 mt-4 items-center lg:items-start">
           {icones.map(({ id, Icon, label }) => (
             <li
               key={id}
@@ -131,7 +131,8 @@ function Hero() {
         </ul>
       </div>
 
-      <div className="absolute right-0 top-0 bottom-0 w-1/2 z-0">
+      {/* Gráfico (somente desktop) */}
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 z-0">
         <ResponsiveContainer width="105%" height="100%">
           <AreaChart
             data={chartData}

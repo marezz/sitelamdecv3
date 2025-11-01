@@ -21,32 +21,36 @@ export default function About() {
   return (
     <section id="about" className="flex flex-col bg-white w-full">
       {/* Título */}
-      <div className="flex flex-col text-left gap-2 py-5 mb-14">
-        <h2 className="text-5xl font-bold text-black text-center">
+      <div className="flex flex-col text-left gap-2 py-5 mb-14 px-4 sm:px-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black text-center leading-tight">
           Sobre o LAMDEC
         </h2>
-        <p className="text-[#6b6b8c] text-xl font-[350] text-center">
+        <p className="text-[#6b6b8c] text-base sm:text-lg md:text-xl font-[350] text-center">
           Excelência em pesquisa e inovação tecnológica
         </p>
       </div>
 
       {/* Infos */}
-      <div className="flex flex-wrap justify-center-safe items-center gap-16 w-full px-25 ">
+      <div className="flex flex-col lg:flex-row flex-wrap justify-center items-center gap-16 w-full px-4 sm:px-8 md:px-25">
         {/* Texto */}
-        <div className="flex flex-col min-w-[380px] max-w-[520px] text-justify gap-4">
-          <h2 className="text-4xl font-semibold leading-tight">Nossa Missão</h2>
-          <p className="text-[#6b6b8c] font-[350] leading-relaxed text-lg">
+        <div className="flex flex-col w-full sm:w-[90%] md:w-[520px] text-justify gap-4 px-2 sm:px-0">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight text-center lg:text-left">
+            Nossa Missão
+          </h2>
+
+          <p className="text-[#6b6b8c] font-[350] leading-relaxed text-justify text-sm sm:text-base md:text-lg">
             O LAMDEC é um laboratório de pesquisa dedicado ao desenvolvimento de
             métodos inovadores de suporte à tomada de decisão. Nossa equipe
             multidisciplinar trabalha em projetos que impactam positivamente a
-            sociedade, desenvolvendo soluções tecnológicas para empresas e
-            órgãos públicos.
+            sociedade, desenvolvendo soluções tecnológicas para empresas e órgãos
+            públicos.
           </p>
 
-          <h2 className="text-4xl font-semibold leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight text-center lg:text-left mt-6">
             Nossos Valores
           </h2>
-          <ul className="space-y-1 text-[#6b6b8c] font-[350] leading-relaxed text-lg">
+
+          <ul className="space-y-2 text-[#6b6b8c] font-[350] leading-relaxed text-sm sm:text-base md:text-lg">
             <li className="flex items-center gap-2">
               <Check size={18} className="text-indigo-600" /> Excelência em
               pesquisa
@@ -67,20 +71,12 @@ export default function About() {
         </div>
 
         {/* Cards */}
-        <div className="flex-1 min-w-[380px] max-w-[600px] flex items-center justify-center">
-          <div className="grid grid-cols-2 gap-4 w-[32vw] max-w-4/5 sm:w-full">
+        <div className="flex-1 min-w-[320px] max-w-[600px] flex items-center justify-center w-full px-4 sm:px-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-[600px]">
             <StatCard icon={<Users />} number="15+" label="Membros da Equipe" />
             <StatCard icon={<Lightbulb />} number="3+" label="Projetos" />
-            <StatCard
-              icon={<Database />}
-              number="3+"
-              label="Anos de Atuação"
-            />
-            <StatCard
-              icon={<BookOpenText />}
-              number="15+"
-              label="Publicações"
-            />
+            <StatCard icon={<Database />} number="3+" label="Anos de Atuação" />
+            <StatCard icon={<BookOpenText />} number="15+" label="Publicações" />
           </div>
         </div>
       </div>
@@ -89,23 +85,20 @@ export default function About() {
         className="w-full pt-24 pb-12"
         plugins={[
           Autoplay({
-            delay: 2000,
+            delay: 1800,
           }),
         ]}
       >
-        <CarouselContent
-          className="flex gap-4
-         justify-center w-full"
-        >
+        <CarouselContent className="flex gap-4 justify-center w-full">
           {logos.map((src, index) => (
             <CarouselItem
               key={index}
-              className="flex-[0_0_20%] flex justify-center"
+              className="flex-[0_0_100%] sm:flex-[0_0_50%] md:flex-[0_0_25%] lg:flex-[0_0_20%] flex justify-center"
             >
               <img
                 src={src}
                 alt={`logo-${index}`}
-                className="h-20 object-contain"
+                className="h-14 sm:h-16 md:h-20 object-contain"
               />
             </CarouselItem>
           ))}
@@ -125,12 +118,16 @@ function StatCard({
   label: string;
 }) {
   return (
-    <div className="bg-white border rounded-2xl w-full h-full p-10 flex flex-col items-center justify-center hover:-translate-y-1 hover:shadow-sm transition-all">
-      <div className="flex flex-row gap-4 justify-between items-center mb-2">
+    <div className="bg-white border rounded-2xl w-full h-[150px] sm:h-[180px] p-6 sm:p-10 flex flex-col items-center justify-center hover:-translate-y-1 hover:shadow-sm transition-all">
+      <div className="flex flex-row gap-3 sm:gap-4 justify-between items-center mb-1 sm:mb-2">
         {icon}
-        <h3 className="text-3xl font-bold text-[#733eec]">{number}</h3>
+        <h3 className="text-2xl sm:text-3xl font-bold text-[#733eec]">
+          {number}
+        </h3>
       </div>
-      <p className="text-black font-medium text-base text-center">{label}</p>
+      <p className="text-black font-medium text-sm sm:text-base text-center">
+        {label}
+      </p>
     </div>
   );
 }

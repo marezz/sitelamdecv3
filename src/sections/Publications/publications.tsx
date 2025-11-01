@@ -14,8 +14,8 @@ export default function Publications() {
 
   if (loading) {
     return (
-      <div className="flex flex-col gap-4 w-full px-25">
-        <Label className="font-bold text-4xl">Pesquisa</Label>
+      <div className="flex flex-col gap-4 w-full px-6 md:px-12 lg:px-25">
+        <Label className="font-bold text-3xl md:text-4xl">Pesquisa</Label>
         <div className="flex items-center justify-center py-12">
           <p className="text-muted-foreground">Carregando publicações...</p>
         </div>
@@ -25,8 +25,8 @@ export default function Publications() {
 
   if (!publicacoes || publicacoes.length === 0) {
     return (
-      <div className="flex flex-col gap-4 w-full px-25">
-        <Label className="font-bold text-4xl">Publicações</Label>
+      <div className="flex flex-col gap-4 w-full px-6 md:px-12 lg:px-25">
+        <Label className="font-bold text-3xl md:text-4xl">Publicações</Label>
         <div className="flex items-center justify-center py-12">
           <p className="text-muted-foreground">
             Nenhuma publicação encontrada.
@@ -50,7 +50,6 @@ export default function Publications() {
   const anos = Object.keys(publicacoesPorAno).sort((a, b) => {
     const aNum = Number(a);
     const bNum = Number(b);
-
     const aIsNum = !isNaN(aNum);
     const bIsNum = !isNaN(bNum);
 
@@ -58,49 +57,54 @@ export default function Publications() {
     if (aIsNum && !bIsNum) return -1;
     if (!aIsNum && bIsNum) return 1;
     return a.localeCompare(b);
-});
+  });
+
   const anoMaisRecente = anos[0] || "";
 
   return (
     <div
       id="publications"
-      className="flex flex-col gap-4 px-25 overflow-x-auto w-full transition-all"
+      className="flex flex-col gap-6 px-6 md:px-12 lg:px-25 overflow-x-auto w-full transition-all"
     >
-      <Label className="flex flex-row font-bold text-4xl w-full">
-        Pesquisas
-      </Label>
+      <Label className="font-bold text-3xl md:text-4xl">Pesquisas</Label>
+
       <Accordion
         type="single"
         collapsible
         defaultValue={anoMaisRecente}
-        className="h-fit p-5"
-        orientation="horizontal"
+        className="h-fit p-2 md:p-5"
       >
         {anos.map((ano) => (
           <AccordionItem key={ano} value={ano} className="h-fit">
-            <AccordionTrigger className="text-xl">{ano}</AccordionTrigger>
-            <AccordionContent className="grid grid-cols-3 w-full h-fit py-4 gap-4">
+            <AccordionTrigger className="text-lg md:text-xl font-semibold">
+              {ano}
+            </AccordionTrigger>
+
+            <AccordionContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full h-fit py-4">
               {publicacoesPorAno[ano].map((pub, idx) => (
                 <Card
                   key={idx}
-                  className="flex flex-col p-6 gap-4 hover:-translate-y-1 hover:shadow-sm transition-all"
+                  className="flex flex-col p-4 sm:p-5 lg:p-6 gap-3 sm:gap-4 hover:-translate-y-1 hover:shadow-sm transition-all"
                 >
                   <a
                     href={pub.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col gap-3 hover:opacity-80 transition-opacity"
+                    className="flex flex-col gap-2 hover:opacity-80 transition-opacity"
                   >
-                    <Label className="font-semibold text-base hover:cursor-pointer line-clamp-2">
+                    <Label className="font-semibold text-sm sm:text-base hover:cursor-pointer line-clamp-2">
                       {pub.titulo}
                     </Label>
-                    <p className="text-sm text-muted-foreground">
+
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                       {pub.autores}
                     </p>
-                    <p className="text-sm text-accent font-medium">
+
+                    <p className="text-xs sm:text-sm text-accent font-medium">
                       {pub.revista}
                     </p>
-                    <span className="text-xs text-muted-foreground mt-1">
+
+                    <span className="text-[11px] sm:text-xs text-muted-foreground mt-1">
                       {pub.categoria}
                     </span>
                   </a>

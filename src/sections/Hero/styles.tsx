@@ -29,5 +29,5 @@ export const Subtitle = styled.p`
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem; /* equivalente ao gap-4 do Tailwind */
+  gap: 1rem;
 `;
