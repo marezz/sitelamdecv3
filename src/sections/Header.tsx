@@ -7,9 +7,9 @@ function Header() {
 
   const navItems = [
     { label: "Sobre", id: "about" },
-    { label: "Equipe", id: "team" },
+    { label: "Pesquisa", id: "publications" },
     { label: "Projetos", id: "projects" },
-    { label: "Publicações", id: "publications" },
+    { label: "Equipe", id: "team" },
     { label: "Contato", id: "contact" },
   ];
 

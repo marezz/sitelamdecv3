@@ -38,7 +38,7 @@ export default function About() {
             Nossa Missão
           </h2>
 
-          <p className="text-[#6b6b8c] font-[350] leading-relaxed text-justify text-sm sm:text-base md:text-lg">
+          <p className="text-[#6b6b8c] text-lg md:text-xl font-[350]">
             O LAMDEC é um laboratório de pesquisa dedicado ao desenvolvimento de
             métodos inovadores de suporte à tomada de decisão. Nossa equipe
             multidisciplinar trabalha em projetos que impactam positivamente a

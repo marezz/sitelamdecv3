@@ -1,10 +1,4 @@
-// src/context/DataContext.tsx
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import type { Project, Publicacao, Equipe } from "@/data/types";
 import { getProjects, getPublicacao, getEquipe } from "@/data/api";

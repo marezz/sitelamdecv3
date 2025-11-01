@@ -1,11 +1,11 @@
-import About from "@/sections/About/About";
-import Contact from "@/sections/Contact/Contact";
-import Footer from "@/sections/Footer/Footer";
-import Header from "@/sections/Header/header";
-import Hero from "@/sections/Hero/Hero";
-import Projects from "@/sections/Projects/Projects";
-import Publications from "@/sections/Publications/publications";
-import Team from "@/sections/Team/Team";
+import About from "@/sections/About";
+import Contact from "@/sections/Contact";
+import Footer from "@/sections/Footer";
+import Header from "@/sections/Header";
+import Hero from "@/sections/Hero";
+import Projects from "@/sections/Projects";
+import Publications from "@/sections/Publications";
+import Team from "@/sections/Team";
 
 export default function Home() {
   return (

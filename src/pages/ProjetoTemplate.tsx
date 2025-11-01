@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Header from "@/sections/Header/header";
+import Header from "@/sections/Header";
 import { Label } from "@/components/ui/label";
 import { useData } from "@/context/DataContext";
 
