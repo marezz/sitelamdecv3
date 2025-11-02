@@ -24,7 +24,7 @@ function Header() {
 
       <nav className="hidden md:flex flex-row gap-8 text-[#64748b]">
         {navItems.map((item) => (
-          <a key={item.id} href={`/v3/#${item.id}`}>
+          <a key={item.id} href={`/#${item.id}`}>
             <h3 className="cursor-pointer hover:text-black transition-colors">
               {item.label}
             </h3>

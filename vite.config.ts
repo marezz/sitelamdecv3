@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/v3/",
+  base: "",
   optimizeDeps: {
     include: ["embla-carousel-autoplay"],
   },
